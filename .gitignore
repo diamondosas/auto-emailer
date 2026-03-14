@@ -1,6 +1,8 @@
 ATTACH
 compose.md
 data.csv
+datas.csv
+subject.txt
 .env
 compose.html
 

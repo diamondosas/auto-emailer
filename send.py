@@ -56,12 +56,12 @@ def send_emails(server: SMTP, template, is_html):
     attachments = confirm_attachments()
     sent_count = 0
 
-    for receiver, message in get_msg("data.csv", template):
+    for receiver, message, subject in get_msg("data.csv", template, SUBJECT):
 
         multipart_msg = MIMEMultipart("mixed") if attachments else MIMEMultipart("alternative")
 
-        if SUBJECT:
-            multipart_msg["Subject"] = SUBJECT
+        if subject:
+            multipart_msg["Subject"] = subject
         else:
             first_line = message.splitlines()[0]
             if is_html and first_line.startswith("<"):
