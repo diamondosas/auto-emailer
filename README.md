@@ -40,7 +40,7 @@ This is a simple program which does its work perfectly. Nothing more, nothing le
 - Create a file `.env` and put the following into it:
 
   ```text
-  display_name=Mr.Bean
+  display_name=Mr.Diamond
   sender_email=your@example.com
   password=12345
   ```
