@@ -112,7 +112,8 @@ def send_emails(server: SMTP, template, is_html):
 
 if __name__ == "__main__":
     host = "smtp.gmail.com"
-    port = 587  # TLS replaced SSL in 1999
+    port = 587    # TLS replaced SSL in 1999
+
 
     is_html = MAIL_COMPOSE.lower().endswith((".html", ".htm"))
 
