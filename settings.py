@@ -7,7 +7,14 @@ load_dotenv()
 DISPLAY_NAME = os.getenv("display_name")
 SENDER_EMAIL = os.getenv("sender_email")
 PASSWORD = os.getenv("password")
-MAIL_COMPOSE: str = os.getenv("mail_compose", "compose.html")
+
+if not os.getenv("mail_compose"):
+    if os.path.exists("compose.txt"):
+        MAIL_COMPOSE = "compose.txt"
+    else:
+        MAIL_COMPOSE = "compose.html"
+else:
+    MAIL_COMPOSE = os.getenv("mail_compose")
 
 if os.path.exists("subject.txt"):
     with open("subject.txt", "r", encoding="utf-8") as f:

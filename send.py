@@ -2,7 +2,7 @@ import csv
 import os
 from settings import SENDER_EMAIL, PASSWORD, DISPLAY_NAME, MAIL_COMPOSE, SUBJECT
 
-from smtplib import SMTP
+from smtplib import SMTP, SMTP_SSL
 import smtplib
 import markdown
 from email.mime.text import MIMEText
@@ -74,7 +74,7 @@ def send_emails(server: SMTP, template, is_html):
 
         if not is_html:
             text = message
-            html = markdown.markdown(text)
+            html = markdown.markdown(text, extensions=["nl2br"])
             part1 = MIMEText(text, "plain")
             part2 = MIMEText(html, "html")
             multipart_msg.attach(part1)
@@ -112,7 +112,7 @@ def send_emails(server: SMTP, template, is_html):
 
 if __name__ == "__main__":
     host = "smtp.gmail.com"
-    port = 587    # TLS replaced SSL in 1999
+    port = 465    # TLS replaced SSL in 1999
 
 
     is_html = MAIL_COMPOSE.lower().endswith((".html", ".htm"))
@@ -122,10 +122,10 @@ if __name__ == "__main__":
 
     context = ssl.create_default_context()
 
-    server = SMTP(host=host, port=port)
+    server = SMTP_SSL(host=host, port=port)
     server.ehlo()
     # server.starttls(context=context)
-    server.starttls()
+    # server.starttls()
     server.ehlo()
     server.login(user=SENDER_EMAIL, password=PASSWORD)
 
