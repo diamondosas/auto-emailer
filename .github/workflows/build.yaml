@@ -67,14 +67,14 @@ jobs:
         overwrite: true
         body: |
           ## AutoMailer - Multi-Platform Hardcore Bulk Communication
-          Accelerating the transition to fully automated, dynamic communications across Earth.
+          Accelerating the transition to fully automated, dynamic communications.
           
           ### Installation Protocol
           1. Download the payload specific to your OS.
           2. Extract the system files.
           3. Initiate the sequence.
           
-          Let's make humanity multi-planetary.
+          Just make it work.
 
     - name: Upload Release Asset (Linux)
       if: runner.os == 'Linux'
@@ -87,14 +87,14 @@ jobs:
         overwrite: true
         body: |
           ## AutoMailer - Multi-Platform Hardcore Bulk Communication
-          Accelerating the transition to fully automated, dynamic communications across Earth.
+          Accelerating the transition to fully automated, dynamic communications.
           
           ### Installation Protocol
           1. Download the payload specific to your OS.
           2. Extract the system files.
           3. Initiate the sequence.
           
-          Let's make humanity multi-planetary.
+          Just make it work.
 
     - name: Upload Release Asset (macOS)
       if: runner.os == 'macOS'
@@ -107,11 +107,11 @@ jobs:
         overwrite: true
         body: |
           ## AutoMailer - Multi-Platform Hardcore Bulk Communication
-          Accelerating the transition to fully automated, dynamic communications across Earth.
+          Accelerating the transition to fully automated, dynamic communications.
           
           ### Installation Protocol
           1. Download the payload specific to your OS.
           2. Extract the system files.
           3. Initiate the sequence.
           
-          Let's make humanity multi-planetary.
+          Just make it work.
