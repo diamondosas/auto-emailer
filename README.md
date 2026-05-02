@@ -1,63 +1,58 @@
-# AutoMailer: Hardcore Bulk Communication
+# email-GPT
 
 ![Python Version](https://img.shields.io/badge/python-3.10%2B-blue?style=for-the-badge&logo=python)
 ![Build Status](https://img.shields.io/badge/build-passing-brightgreen?style=for-the-badge&logo=githubactions)
 ![License](https://img.shields.io/badge/license-MIT-green?style=for-the-badge)
 
-*Accelerating the transition to fully automated, dynamic communications.*
+Efficient bulk email automation. Simple, fast, and built from first principles.
 
-![App Screenshot](assets/screenshot.png) 
-*(Insert picture of the GUI terminal here)*
+![App Screenshot](assets/screenshot.png)
 
-## The Vision
+## Overview
 
-Look, the current state of bulk emailing is fundamentally broken. It’s too complex, too slow, and lacks the hardcore engineering required to scale properly. We needed to solve this from first principles. 
+Existing bulk email tools are unnecessarily complex. AutoMailer is designed to be direct. It takes data from a CSV, injects it into a template, and sends it. That's it.
 
-AutoMailer is an extremely profound leap forward. We've built a system that takes dynamic data, injects it into personalized payloads, and fires it off with order-of-magnitude greater efficiency. Nothing more, nothing less. It’s a complete rethink of how email automation works.
+## Features
 
-## What's New
-- **HTML Payloads:** You can now send full HTML emails. Just write your `compose.html` and the system handles the rest. Mind-blowing.
-- **Next-Level GUI:** We built a sleek, dark-mode terminal GUI that gives you real-time telemetry on your outgoing payloads. 
+- **Dynamic Templates:** Unlimited variables from CSV columns.
+- **HTML & Markdown:** Support for formatted text and links.
+- **Attachments:** Send any file type.
+- **Dark Mode GUI:** Real-time tracking of sent emails.
+- **Rate Limiting:** Automatic daily limits to prevent account suspension.
 
-## Core Capabilities
+## Usage
 
-1. **Dynamic Telemetry Injection:** Send dynamic emails with unlimited variables pulling directly from a CSV file.
-2. **Markdown & HTML Formatting:** Embed links, images, and structure with zero friction.
-3. **Payload Attachment:** Attach any kind of files seamlessly to your outgoing sequence.
-
-## The Playbook (Usage)
-
-To operate this system, you need to understand the physics of it:
-
-1. **Acquire the Hardware:** Ensure Python is installed on your system.
-2. **Clone the Repo:** Download the source code and move into the project directory.
-3. **Install Dependencies:**
+1. **Install Dependencies:**
    ```shell
    pip install -r requirements.txt
    ```
-4. **Draft the Blueprint:** Write your email inside **`compose.md`** (or use HTML). Use variables by prefixing them with a `$` sign.
-   > *Example: "Hi $NAME, your order for $product is ready."*
-5. **Load the Fuel (Data):** Put your data inside the `data.csv` file. 
-   *Crucial detail: The header must contain 'EMAIL' (uppercase). This is non-negotiable.*
 
-   ![csv_image](https://user-images.githubusercontent.com/66209958/103172846-715d0c00-487c-11eb-9419-9dceb4297e49.png)
+2. **Setup Template:**
+   Write your email in `compose.md` or `compose.html`. Use `$VARIABLE` to match CSV headers.
+   > *Example: "Hi $NAME, your order for $ITEM is ready."*
 
-6. **Load Attachments:** If you need to send files, drop them in the `ATTACH` directory. 
-7. **Ignition Credentials:** Create an `.env` file and input your parameters:
+3. **Setup Data:**
+   Add recipient data to `data.csv`. The file **must** have an `EMAIL` column.
+
+4. **Add Attachments:**
+   Place files in the `ATTACH` folder.
+
+5. **Set Credentials:**
+   Create a `.env` file:
    ```text
-   display_name=Elon
-   sender_email=your@example.com
-   password=12345
+   display_name=Your Name
+   sender_email=your@gmail.com
+   password=your-app-password
    ```
-   *Security Protocol: Do not use your root password. Create a Gmail Account, activate 2-Step Verification, and generate an [App Password](https://support.google.com/accounts/answer/185833?hl=en).*
+   *Use a Gmail [App Password](https://support.google.com/accounts/answer/185833), not your main password.*
 
-8. **LIFT OFF:** 
-   Run the system via the command line or our newly engineered GUI.
+6. **Run:**
    ```shell
    python gui.py
-   # OR
-   python send.py
    ```
 
-You will be asked to verify your attachments before launch. Upon confirmation, the sequence initiates. You will receive full telemetry and a success report once the payloads reach their destination.
+Verify your settings in the GUI and start. It just works.
 
+## Support
+
+Report bugs in the issues section. Keep it technical.

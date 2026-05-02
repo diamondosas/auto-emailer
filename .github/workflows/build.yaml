@@ -66,15 +66,14 @@ jobs:
         tag: v0.0.1
         overwrite: true
         body: |
-          ## AutoMailer - Multi-Platform Hardcore Bulk Communication
-          Accelerating the transition to fully automated, dynamic communications.
+          ## AutoMailer v0.0.1
+          Simple, high-efficiency bulk email automation.
           
-          ### Installation Protocol
-          1. Download the payload specific to your OS.
-          2. Extract the system files.
-          3. Initiate the sequence.
+          ### Instructions
+          1. Download the version for your OS.
+          2. Extract and run the executable.
           
-          Just make it work.
+          It just works.
 
     - name: Upload Release Asset (Linux)
       if: runner.os == 'Linux'
@@ -86,15 +85,14 @@ jobs:
         tag: v0.0.1
         overwrite: true
         body: |
-          ## AutoMailer - Multi-Platform Hardcore Bulk Communication
-          Accelerating the transition to fully automated, dynamic communications.
+          ## AutoMailer v0.0.1
+          Simple, high-efficiency bulk email automation.
           
-          ### Installation Protocol
-          1. Download the payload specific to your OS.
-          2. Extract the system files.
-          3. Initiate the sequence.
+          ### Instructions
+          1. Download the version for your OS.
+          2. Extract and run the executable.
           
-          Just make it work.
+          It just works.
 
     - name: Upload Release Asset (macOS)
       if: runner.os == 'macOS'
@@ -106,12 +104,11 @@ jobs:
         tag: v0.0.1
         overwrite: true
         body: |
-          ## AutoMailer - Multi-Platform Hardcore Bulk Communication
-          Accelerating the transition to fully automated, dynamic communications.
+          ## AutoMailer v0.0.1
+          Simple, high-efficiency bulk email automation.
           
-          ### Installation Protocol
-          1. Download the payload specific to your OS.
-          2. Extract the system files.
-          3. Initiate the sequence.
+          ### Instructions
+          1. Download the version for your OS.
+          2. Extract and run the executable.
           
-          Just make it work.
+          It just works.
