@@ -1,0 +1,53 @@
+name: Build EXE Package
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+        pip install nuitka customtkinter pystray Pillow
+
+    - name: Build EXE package
+      run: |
+        python -m nuitka --standalone --assume-yes-for-downloads --enable-plugin=tk-inter --windows-console-mode=disable --follow-imports --include-package=customtkinter --include-package=pystray --include-package=PIL gui.py
+
+    - name: Compress gui.dist
+      run: |
+        Rename-Item gui.dist AutoMailer_App
+        7z a -t7z -sfx -ms=on -mx=9 AutoMailer.exe AutoMailer_App
+
+    - name: Create and Upload Release
+      uses: svenstaro/upload-release-action@v2
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: AutoMailer.exe
+        asset_name: AutoMailer.exe
+        release_name: v0.0.1
+        tag: v0.0.1
+        overwrite: true
+        body: |
+          ## AutoMailer - Hardcore Bulk Emailing
+          Accelerating the transition to fully automated, dynamic communications.
+          
+          ### Installation Protocol
+          1. Click to download the executable payload (`.exe`).
+          2. Double click to extract the system files.
+          3. Initiate the sequence by running `gui.exe` inside the extracted core folder.
+          Let's make humanity multi-planetary.
