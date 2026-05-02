@@ -61,6 +61,3 @@ To operate this system, you need to understand the physics of it:
 
 You will be asked to verify your attachments before launch. Upon confirmation, the sequence initiates. You will receive full telemetry and a success report once the payloads reach their destination.
 
-## Engineering Support
-
-If the engines fail or you detect an anomaly, please report the issue in the repository. We need to iterate fast and fix things. Just make it work.
