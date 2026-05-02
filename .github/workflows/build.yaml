@@ -1,4 +1,4 @@
-name: Build EXE Package
+name: Build Multi-Platform Payloads
 
 on:
   workflow_dispatch:
@@ -8,7 +8,13 @@ permissions:
 
 jobs:
   build:
-    runs-on: windows-latest
+    name: Build on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    continue-on-error: true
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, ubuntu-latest, macos-latest]
 
     steps:
     - name: Checkout repository
@@ -19,35 +25,93 @@ jobs:
       with:
         python-version: '3.12'
 
+    - name: Install System Dependencies (Linux)
+      if: runner.os == 'Linux'
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y python3-tk libx11-dev
+
     - name: Install dependencies
       run: |
         pip install -r requirements.txt
         pip install nuitka customtkinter pystray Pillow
 
-    - name: Build EXE package
+    - name: Build Payload (Windows)
+      if: runner.os == 'Windows'
       run: |
         python -m nuitka --standalone --assume-yes-for-downloads --enable-plugin=tk-inter --windows-console-mode=disable --follow-imports --include-package=customtkinter --include-package=pystray --include-package=PIL gui.py
-
-    - name: Compress gui.dist
-      run: |
         Rename-Item gui.dist AutoMailer_App
-        7z a -t7z -sfx -ms=on -mx=9 AutoMailer.exe AutoMailer_App
+        7z a -t7z -sfx -ms=on -mx=9 AutoMailer_Windows.exe AutoMailer_App
 
-    - name: Create and Upload Release
+    - name: Build Payload (Linux)
+      if: runner.os == 'Linux'
+      run: |
+        python3 -m nuitka --standalone --assume-yes-for-downloads --enable-plugin=tk-inter --follow-imports --include-package=customtkinter --include-package=pystray --include-package=PIL gui.py
+        mv gui.dist AutoMailer_Linux_App
+        tar -czf AutoMailer_Linux.tar.gz AutoMailer_Linux_App
+
+    - name: Build Payload (macOS)
+      if: runner.os == 'macOS'
+      run: |
+        python3 -m nuitka --standalone --assume-yes-for-downloads --enable-plugin=tk-inter --macos-create-app-bundle --follow-imports --include-package=customtkinter --include-package=pystray --include-package=PIL gui.py
+        zip -r AutoMailer_macOS.zip gui.app
+
+    - name: Upload Release Asset (Windows)
+      if: runner.os == 'Windows'
       uses: svenstaro/upload-release-action@v2
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
-        file: AutoMailer.exe
-        asset_name: AutoMailer.exe
-        release_name: v0.0.1
+        file: AutoMailer_Windows.exe
+        asset_name: AutoMailer_Windows.exe
         tag: v0.0.1
         overwrite: true
         body: |
-          ## AutoMailer - Hardcore Bulk Emailing
-          Accelerating the transition to fully automated, dynamic communications.
+          ## AutoMailer - Multi-Platform Hardcore Bulk Communication
+          Accelerating the transition to fully automated, dynamic communications across Earth.
           
           ### Installation Protocol
-          1. Click to download the executable payload (`.exe`).
-          2. Double click to extract the system files.
-          3. Initiate the sequence by running `gui.exe` inside the extracted core folder.
+          1. Download the payload specific to your OS.
+          2. Extract the system files.
+          3. Initiate the sequence.
           
+          Let's make humanity multi-planetary.
+
+    - name: Upload Release Asset (Linux)
+      if: runner.os == 'Linux'
+      uses: svenstaro/upload-release-action@v2
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: AutoMailer_Linux.tar.gz
+        asset_name: AutoMailer_Linux.tar.gz
+        tag: v0.0.1
+        overwrite: true
+        body: |
+          ## AutoMailer - Multi-Platform Hardcore Bulk Communication
+          Accelerating the transition to fully automated, dynamic communications across Earth.
+          
+          ### Installation Protocol
+          1. Download the payload specific to your OS.
+          2. Extract the system files.
+          3. Initiate the sequence.
+          
+          Let's make humanity multi-planetary.
+
+    - name: Upload Release Asset (macOS)
+      if: runner.os == 'macOS'
+      uses: svenstaro/upload-release-action@v2
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: AutoMailer_macOS.zip
+        asset_name: AutoMailer_macOS.zip
+        tag: v0.0.1
+        overwrite: true
+        body: |
+          ## AutoMailer - Multi-Platform Hardcore Bulk Communication
+          Accelerating the transition to fully automated, dynamic communications across Earth.
+          
+          ### Installation Protocol
+          1. Download the payload specific to your OS.
+          2. Extract the system files.
+          3. Initiate the sequence.
+          
+          Let's make humanity multi-planetary.

@@ -1,2 +1,6 @@
 python-dotenv
 Markdown
+customtkinter
+pystray
+Pillow
+markdown
