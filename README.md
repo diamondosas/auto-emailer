@@ -1,4 +1,4 @@
-# AutoMailer: Hardcore Bulk Communication
+# email-GPT: Hardcore Bulk Communication
 
 ![Python Version](https://img.shields.io/badge/python-3.10%2B-blue?style=for-the-badge&logo=python)
 ![Build Status](https://img.shields.io/badge/build-passing-brightgreen?style=for-the-badge&logo=githubactions)
